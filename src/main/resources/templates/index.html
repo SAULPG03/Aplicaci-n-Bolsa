@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consulta Bolsa</title>
+</head>
+<body>
+    <h1>Consulta de acciones</h1>
+	<form method="post" action="/graficar">
+	    <label>Ticker:</label>
+	    <input type="text" name="ticker" required />
+
+	    <label>Periodo:</label>
+	    <select name="periodo">
+	        <option value="1m">Último mes</option>
+	        <option value="3m">Últimos 3 meses</option>
+	        <option value="6m">Últimos 6 meses</option>
+	        <option value="1a">Último año</option>
+	        <option value="2a">Últimos 2 años</option>
+	        <option value="3a">Últimos 3 años</option>
+	    </select>
+
+	    <button type="submit">Graficar</button>
+	</form>
+</body>
+</html>

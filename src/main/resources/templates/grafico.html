@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráfico de Bolsa</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>Gráfico de [[${ticker}]]</h1>
+
+    <form method="post" action="/graficar">
+        <label>Ticker:</label>
+        <input type="text" name="ticker" placeholder="AAPL" required>
+        <label>Años:</label>
+        <input type="number" name="anios" min="1" max="10" value="1">
+        <button type="submit">Graficar</button>
+    </form>
+
+    <canvas id="stockChart" width="800" height="400"></canvas>
+
+    <script th:inline="javascript">
+        const fechas = /*[[${fechas}]]*/ [];
+        const precios = /*[[${precios}]]*/ [];
+
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: fechas,
+                datasets: [{
+                    label: 'Precio de Cierre',
+                    data: precios,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Fecha'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: 'Precio ($)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
